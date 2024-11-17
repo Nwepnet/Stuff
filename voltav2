@@ -4,11 +4,6 @@ getgenv().RightArm = {16491814026} -- Right Arm accessory
 getgenv().LeftArm = {16296614184} -- Left Arm accessory
 getgenv().Head = {14555772508} -- Head accessory
 
--- Loadstring executes first
-local function loadExternalScript()
-    
-end
-
 -- Weld function
 local function weldParts(part0, part1, c0, c1)
     local weld = Instance.new("Weld")
