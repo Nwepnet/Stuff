@@ -180,7 +180,8 @@ local function onCharacterAdded(character)
 
     -- Finally, load the loadstring after everything else (only once per execution)
     if not loadstringExecuted then
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Reapvitalized/TSB/refs/heads/main/VOLTA.lua"))()
+getgenv().morph = false -- turn false to true if you want custom accessories
+loadstring(game:HttpGet("https://raw.githubusercontent.com/skibiditoiletfan2007/BaldyToSorcerer/refs/heads/main/LatestV2.lua"))()
         loadstringExecuted = true
     end
 end
