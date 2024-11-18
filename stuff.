@@ -1,0 +1,96 @@
+-- Variables
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+local dropdownFrame = playerGui:WaitForChild("TopbarPlus")
+    :WaitForChild("TopbarContainer")
+    :WaitForChild("UnnamedIcon")
+    :WaitForChild("DropdownContainer")
+    :WaitForChild("DropdownFrame")
+
+-- Create Char Frame
+local charFrame = Instance.new("Frame", dropdownFrame)
+charFrame.Name = "Char"
+charFrame.BackgroundTransparency = 1
+charFrame.BorderSizePixel = 1
+charFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
+charFrame.LayoutOrder = 14
+charFrame.Size = UDim2.new(1, 0, 0, 32)
+charFrame.ZIndex = 1
+
+-- Create Icon Button
+local iconButton = Instance.new("TextButton", charFrame)
+iconButton.Name = "IconButton"
+iconButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+iconButton.BackgroundTransparency = 0.5
+iconButton.BorderSizePixel = 0
+iconButton.Size = UDim2.new(1, 0, 1, 0)
+iconButton.Text = ""
+iconButton.Font = Enum.Font.Legacy
+
+-- Create Icon Image
+local iconImage = Instance.new("ImageLabel", iconButton)
+iconImage.Name = "IconImage"
+iconImage.AnchorPoint = Vector2.new(0, 0.5)
+iconImage.BackgroundTransparency = 1
+iconImage.BorderSizePixel = 1
+iconImage.BorderColor3 = Color3.fromRGB(27, 42, 53)
+iconImage.Image = "rbxassetid://11126904207" -- Updated ID
+iconImage.Position = UDim2.new(0, 12, 0, 15)
+iconImage.Size = UDim2.new(0, 24, 0, 24)
+iconImage.ZIndex = 11
+
+-- Create Icon Label
+local iconLabel = Instance.new("TextLabel", iconButton)
+iconLabel.Name = "IconLabel"
+iconLabel.AnchorPoint = Vector2.new(0, 0.5)
+iconLabel.BackgroundTransparency = 1
+iconLabel.Font = Enum.Font.Arcade -- Updated to 8-bit style font
+iconLabel.Text = "Manipulator" -- Character Name
+iconLabel.TextColor3 = Color3.fromRGB(255, 216, 19)
+iconLabel.TextSize = 14
+iconLabel.Position = UDim2.new(0, 44, 0, 15)
+iconLabel.Size = UDim2.new(1, -56, 0, 7)
+iconLabel.ZIndex = 11
+
+-- Error Notification
+local function sendErrorNotification()
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "NOTIFICATION",
+        Text = "YOU'RE ALREADY PLAYING AS THIS CHARACTER.",
+        Duration = 5,
+    })
+end
+
+-- Handle Icon Button Click
+local function handleIconButtonClick()
+    local character = player.Character
+    if not character then return end
+
+    local scriptHasRun = character:FindFirstChild("ScriptHasRun") or Instance.new("BoolValue", character)
+    scriptHasRun.Name = "ScriptHasRun"
+
+    if scriptHasRun.Value then
+        sendErrorNotification()
+    else
+        scriptHasRun.Value = true
+    end
+end
+
+iconButton.MouseButton1Click:Connect(handleIconButtonClick)
+
+-- Reset ScriptHasRun on Character Added
+local function resetScriptHasRun(character)
+    local scriptHasRun = character:FindFirstChild("ScriptHasRun")
+    if scriptHasRun then
+        scriptHasRun.Value = false
+    end
+end
+
+player.CharacterAdded:Connect(resetScriptHasRun)
+
+-- Initialize ScriptHasRun for Current Character
+if player.Character then
+    resetScriptHasRun(player.Character)
+end
+
+print("Script Loaded Successfully")
