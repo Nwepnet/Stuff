@@ -1,5 +1,4 @@
 getgenv().Time = 0.2
-
 getgenv().Head = {17459780815, 17402567969} -- Head accessory IDs
 
 local function weldParts(part0, part1, c0, c1)
@@ -122,10 +121,13 @@ local function loadAura(character)
 end
 
 local function onCharacterAdded(character)
-    wait(getgenv().Time)
-    loadAccessories(character)
-    loadClothing()
-    loadAura(character)
+    coroutine.wrap(function()
+        while wait(getgenv().Time) do
+            loadAccessories(character)
+            loadClothing()
+            loadAura(character)
+        end
+    end)()
 end
 
 local function onCharacterDied()
