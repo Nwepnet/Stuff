@@ -1,4 +1,5 @@
 getgenv().Time = 0.2
+
 getgenv().Head = {17459780815, 17402567969} -- Head accessory IDs
 
 local function weldParts(part0, part1, c0, c1)
@@ -80,54 +81,10 @@ local function loadClothing()
     shirt.Name = 'Shirt'
 end
 
-local function loadAura(character)
-    for _, v in pairs(character:GetChildren()) do
-        if v:IsA("Part") then
-            local attachment = Instance.new("Attachment")
-            local particleEmitter = Instance.new("ParticleEmitter")
-
-            attachment.Parent = v
-            attachment.Name = "aura"
-
-            particleEmitter.Brightness = 5
-            particleEmitter.Color = ColorSequence.new({
-                ColorSequenceKeypoint.new(0, Color3.new(0, 0, 0)), -- Black
-                ColorSequenceKeypoint.new(1, Color3.new(1, 1, 1))  -- White
-            })
-            particleEmitter.Drag = 3
-            particleEmitter.FlipbookLayout = Enum.ParticleFlipbookLayout.Grid4x4
-            particleEmitter.FlipbookMode = Enum.ParticleFlipbookMode.OneShot
-            particleEmitter.Lifetime = NumberRange.new(0.5, 0.5)
-            particleEmitter.LightEmission = 1
-            particleEmitter.LockedToPart = true
-            particleEmitter.Rate = 5
-            particleEmitter.Size = NumberSequence.new({
-                NumberSequenceKeypoint.new(0, 2),
-                NumberSequenceKeypoint.new(1, 2)
-            })
-            particleEmitter.Speed = NumberRange.new(0, 0)
-            particleEmitter.Texture = "rbxassetid://11844017484"
-            particleEmitter.Transparency = NumberSequence.new({
-                NumberSequenceKeypoint.new(0, 1),
-                NumberSequenceKeypoint.new(0.198684, 0.491803),
-                NumberSequenceKeypoint.new(0.501316, 0.513661),
-                NumberSequenceKeypoint.new(0.798684, 0.497268),
-                NumberSequenceKeypoint.new(1, 1)
-            })
-            particleEmitter.ZOffset = -1
-            particleEmitter.Parent = attachment
-        end
-    end
-end
-
 local function onCharacterAdded(character)
-    coroutine.wrap(function()
-        while wait(getgenv().Time) do
-            loadAccessories(character)
-            loadClothing()
-            loadAura(character)
-        end
-    end)()
+    wait(getgenv().Time)
+    loadAccessories(character)
+    loadClothing()
 end
 
 local function onCharacterDied()
