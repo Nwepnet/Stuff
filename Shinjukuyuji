@@ -2,7 +2,7 @@
 -- Configuration for chat messages and boosts
 local CONFIG = {
     EnableChatMessages = true,  -- Set to false to disable chat messages
-    FrontDashBoostSpeed = 255,  -- Configurable front dash boost speed
+    FrontDashBoostSpeed = 155,  -- Configurable front dash boost speed
     SideDashBoostSpeed = 900,   -- Configurable side dash boost speed
     BoostDuration = 0.4,        -- Duration of boost
     Language = "EN"             -- Languages: JP (Japanese), EN (English)
@@ -167,7 +167,7 @@ local function playAnimationSequence(player)
 
         animTracks.wideStrike:Play()
         animTracks.wideStrike.TimePosition = -1
-        task.wait(3)
+        task.wait(3.2)
         animTracks.wideStrike:Stop()
 
         task.wait(PLAY_DURATION)
