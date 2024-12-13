@@ -397,7 +397,7 @@ local function playAnimationSequence(player)
         ApplyBoost(character, boostDirection, CONFIG.FrontDashBoostSpeed)
         sendChatMessage({
             JP = "チキチータ..夢はありますか？", 
-            EN = "Chiquitita.. You have a dream?"
+            EN = "Kokusen!"
         })
         task.wait(0.32)
         animTracks.mahitoUlt:Stop()
@@ -405,7 +405,7 @@ local function playAnimationSequence(player)
         animTracks.cleaveFr:Play()
         animTracks.cleaveFr.TimePosition = 0.27
         animTracks.cleaveFr:AdjustSpeed(1.12)
-        task.wait(0.5)
+        task.wait(1)
         animTracks.cleaveFr:Stop()
         
         -- Reset flag after sequence
@@ -491,7 +491,7 @@ local function playAnimationSequence(player)
         ApplyBoost(character, boostDirection, CONFIG.SideDashBoostSpeed)
         sendChatMessage({
             JP = "チキチータ..", 
-            EN = "Chiquitita.."
+            EN = "Reverse cursed technique!"
         })
         task.wait(1)
         animTracks.hakariCounter:Stop()
