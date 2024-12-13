@@ -2,7 +2,7 @@
 -- Configuration for chat messages and boosts
 local CONFIG = {
     EnableChatMessages = true,  -- Set to false to disable chat messages
-    FrontDashBoostSpeed = 550,  -- Configurable front dash boost speed
+    FrontDashBoostSpeed = 255,  -- Configurable front dash boost speed
     SideDashBoostSpeed = 900,   -- Configurable side dash boost speed
     BoostDuration = 0.4,        -- Duration of boost
     Language = "EN"             -- Languages: JP (Japanese), EN (English)
